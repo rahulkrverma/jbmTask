@@ -1,8 +1,17 @@
 
 import tensorflow as tf
 import cv2
-import sys
+import sys, os
 import numpy as np
+
+# from tensorflow.python.saved_model import builder as saved_model_builder
+# from tensorflow.python.util import compat
+
+# tf.app.flags.DEFINE_integer('training_iteration', 10,
+#                             'number of training iterations.')
+# tf.app.flags.DEFINE_integer('model_version', 1, 'version number of the model.')
+# tf.app.flags.DEFINE_string('work_dir', '/tmp', 'Working directory.')
+# FLAGS = tf.app.flags.FLAGS
 
 def read_imgs(record):
 	keys_to_features = {
@@ -35,24 +44,24 @@ def model_fn(features, labels, mode, params):
 
 	net = tf.identity(net, name = "input_tensor")
 	
-	net = tf.reshape(net, [-1, 750, 1000, 3])    
+	net = tf.reshape(net, [-1, 224, 224, 3])    
 
 	net = tf.identity(net, name = "input_tensor_after")
 
 	net = tf.layers.conv2d(inputs = net, name = 'layer_conv1',
 							filters = 32, kernel_size = 3,
 							padding = 'same', activation = tf.nn.relu)
-	net = tf.layers.max_pooling2d(inputs = net, pool_size = 2, strides = 2)
+	net = tf.layers.max_pooling2d(inputs = net, pool_size = 2, strides = 3)
 
 	net = tf.layers.conv2d(inputs = net, name = 'layer_conv2',
 							filters = 64, kernel_size = 3,
 							padding = 'same', activation = tf.nn.relu)
-	net = tf.layers.max_pooling2d(inputs = net, pool_size = 2, strides = 2)  
+	net = tf.layers.max_pooling2d(inputs = net, pool_size = 2, strides = 3)  
 
 	net = tf.layers.conv2d(inputs = net, name = 'layer_conv3',
 							filters = 64, kernel_size = 3,
 							padding = 'same', activation = tf.nn.relu)
-	net = tf.layers.max_pooling2d(inputs = net, pool_size = 2, strides = 2)    
+	net = tf.layers.max_pooling2d(inputs = net, pool_size = 2, strides = 3)    
 
 	net = tf.contrib.layers.flatten(net)
 
@@ -82,11 +91,8 @@ def model_fn(features, labels, mode, params):
 		loss = tf.reduce_mean(cross_entropy)
 
 		optimizer = tf.train.AdamOptimizer(learning_rate=params["learning_rate"])
-		train_op = optimizer.minimize(
-			loss=loss, global_step=tf.train.get_global_step())
-		metrics = {
-			"accuracy": tf.metrics.accuracy(labels, y_pred_cls)
-		}
+		train_op = optimizer.minimize(loss=loss, global_step=tf.train.get_global_step())
+		metrics = {"accuracy": tf.metrics.accuracy(labels, y_pred_cls)}
 
 		spec = tf.estimator.EstimatorSpec(
 			mode = mode,
@@ -103,16 +109,26 @@ if __name__ == '__main__':
 
 	model = tf.estimator.Estimator(model_fn = model_fn,
 									params = {"learning_rate": 1e-4},
-									model_dir = "../model/")
+									model_dir = "../model__/")
 
 	count = 0
-	while (count < 10):
+	while (count < 1):
 		model.train(input_fn=train_input_fn, steps=10)
 		result = model.evaluate(input_fn=val_input_fn)
 		print(result)
-		print("Classification accuracy: {0:.2%}".format(result["accuracy"]))
+		# print("Classification accuracy: {0:.2%}".format(result["accuracy"]))
 		sys.stdout.flush()
 		count = count + 1
+
+
+	# export_path_base = sys.argv[-1]
+	# export_path = os.path.join(compat.as_bytes('.'), compat.as_bytes(str(FLAGS.model_version)))
+	# print ('Exporting trained model to', export_path)
+
+	# builder = saved_model_builder.SavedModelBuilder(export_path)
+
+
+
 	
 
 

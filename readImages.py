@@ -33,7 +33,7 @@ def load_image(filePath):
 	img = cv2.imread(filePath)
 	if img is None:
 		return None
-	img = cv2.resize(img, (1000, 750), interpolation=cv2.INTER_CUBIC)
+	img = cv2.resize(img, (224, 224), interpolation=cv2.INTER_CUBIC)
 	img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 	return img
 
