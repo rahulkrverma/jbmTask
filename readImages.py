@@ -1,6 +1,4 @@
 
-
-
 from random import shuffle
 import glob
 import sys
@@ -75,6 +73,4 @@ if __name__ == '__main__':
 
 	createDataRecord('../data/train.tfrecords', trainImgs, trainLabel)
 	createDataRecord('../data/test.tfrecords', testImgs, testLabel)
-
-
 

@@ -1,17 +1,9 @@
 
+
 import tensorflow as tf
 import cv2
 import sys, os
 import numpy as np
-
-# from tensorflow.python.saved_model import builder as saved_model_builder
-# from tensorflow.python.util import compat
-
-# tf.app.flags.DEFINE_integer('training_iteration', 10,
-#                             'number of training iterations.')
-# tf.app.flags.DEFINE_integer('model_version', 1, 'version number of the model.')
-# tf.app.flags.DEFINE_string('work_dir', '/tmp', 'Working directory.')
-# FLAGS = tf.app.flags.FLAGS
 
 def read_imgs(record):
 	keys_to_features = {
@@ -119,20 +111,4 @@ if __name__ == '__main__':
 		# print("Classification accuracy: {0:.2%}".format(result["accuracy"]))
 		sys.stdout.flush()
 		count = count + 1
-
-
-	# export_path_base = sys.argv[-1]
-	# export_path = os.path.join(compat.as_bytes('.'), compat.as_bytes(str(FLAGS.model_version)))
-	# print ('Exporting trained model to', export_path)
-
-	# builder = saved_model_builder.SavedModelBuilder(export_path)
-
-
-
-	
-
-
-
-
-
-
+		
