@@ -1,0 +1,10 @@
+This module is classification of images in 6 classes. i have encloded the class label as -
+
+label 0 for Scratch Mark class
+label 1 for Slot Damage class
+label 2 for Thinning class
+label 3 for Wrinkle class
+label 4 for Back Side class
+label 5 for Front Side class
+
+Details of each source code 
