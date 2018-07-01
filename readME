@@ -1,4 +1,4 @@
-This module is classification of images in 6 classes. i have encloded the class label as -
+This module is classification of images in 6 classes. i have encoded the class label as -
 
 label 0 for Scratch Mark class
 label 1 for Slot Damage class
@@ -8,7 +8,7 @@ label 4 for Back Side class
 label 5 for Front Side class
 
 Details of each source code -
-1. readImages.py - read all the images assign label to each image as per there class, resize it to 224 X 224 image and convert it to RGB. After converting images it witll write these data to data folder in tfrecords file. there is seperate file for train and test set.
+1. readImages.py - read all the images assign label to each image as per there class, resize it to 224 X 224 image and convert it to RGB. After converting images it will write these data to data folder in tfrecords file. there is separate file for train and test set.
 
 	>> python3 readImages.py
 
@@ -22,4 +22,4 @@ Details of each source code -
 
 	>>	python3 runServer.py
 
-	after runing this service, request on http://0.0.0.0:5000/getLabel variable name is img which accept the image and return the predicted label.
+	after running this service, request on http://0.0.0.0:5000/getLabel variable name is img which accept the image and return the predicted label.
