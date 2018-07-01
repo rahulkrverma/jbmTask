@@ -24,7 +24,7 @@ def getImage():
 
 			ret = {'Label' : imgLabel,
 					'status' : 1,
-					'msg' : 'sucess'}
+					'msg' : '‘success’'}
 			return jsonify(ret)
 		else:
 			ret = {'Label' : None,

@@ -7,4 +7,19 @@ label 3 for Wrinkle class
 label 4 for Back Side class
 label 5 for Front Side class
 
-Details of each source code 
+Details of each source code -
+1. readImages.py - read all the images assign label to each image as per there class, resize it to 224 X 224 image and convert it to RGB. After converting images it witll write these data to data folder in tfrecords file. there is seperate file for train and test set.
+
+	>> python3 readImages.py
+
+2. trainNetwork.py - this code train the network. read the data form data folder, feed data to network and evaluate the model using test data.
+
+	>> python3 trainNetwork.py
+
+3. predict.py - predict the label of image. load the save model, read the image apply preprocessing, pass to network and return the predicted label. this code is called by runServer.py file. you can also use this code for prediction without using runServer file. Read the image in this file and pass to preProcess_img function, it return the label of the image.
+
+4. runServer.py - this code deploy this module as a service, on 5000 port using POST method. it will run on /getLabel address on 5000 port.
+
+	>>	python3 runServer.py
+
+	after runing this service, request on http://0.0.0.0:5000/getLabel variable name is img which accept the image and return the predicted label.
