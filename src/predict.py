@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 import tensorflow as tf
 
+from img_preProcess import preProcess
+
 def predict_label(img):
 	img = preProcess_img(img)
 	with tf.Session() as sess:
@@ -21,4 +23,7 @@ def predict_label(img):
 def preProcess_img(imgArr):
 	imgArr = cv2.resize(imgArr, (224, 224), interpolation = cv2.INTER_CUBIC)
 	imgArr = cv2.cvtColor(imgArr, cv2.COLOR_BGR2RGB)
+
+	imgArr = preProcess(imgArr)
+	
 	return [imgArr]

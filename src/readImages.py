@@ -62,8 +62,9 @@ def createDataRecord(out_filename, filePaths, labels):
 
 if __name__ == '__main__':
 
-	trainPath = '../All_61326/train_61326/*/*'
+	# trainPath = '../All_61326/train_61326/*/*'
 	testPath = '../All_61326/test_61326/*'
+	trainPath = '../imgAug/*/*'
 	
 	trainImgs = glob.glob(trainPath)
 	testImgs = glob.glob(testPath)
